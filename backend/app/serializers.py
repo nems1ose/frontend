@@ -48,6 +48,13 @@ class HistorySerializer(HistorysSerializer):
     def get_films(self, history):
         items = FilmHistory.objects.filter(history=history)
         return [FilmItemSerializer(item.film, context={"viewed": item.viewed}).data for item in items]
+    
+    
+class HistoryStatusesSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = HistoryStatus
+        fields = ("id", "name")
 
 
 class FilmItemSerializer(FilmSerializer):
