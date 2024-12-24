@@ -10,6 +10,7 @@ type T_HistorysSlice = {
     films_count: number | null,
     history: T_History | null,
     historys: T_History[],
+    statuses: T_Statuses[],
     filters: T_HistorysFilters,
     save_mm: boolean
 }
@@ -19,6 +20,7 @@ const initialState:T_HistorysSlice = {
     films_count: null,
     history: null,
     historys: [],
+    statuses: [],
     filters: {
         status: "Не указан",
         date_formation_start: PREV_WEEK.toISOString().split('T')[0],
@@ -48,6 +50,14 @@ export const fetchHistorys = createAsyncThunk<T_History[], object, AsyncThunkCon
         }) as AxiosResponse<T_History[]>
 
         return response.data.filter(history => history.owner.includes(state.historys.filters.owner))
+    }
+)
+
+export const fetchHistoryStatuses = createAsyncThunk<T_Statuses[], object, AsyncThunkConfig>(
+    "historys/statuses",
+    async function(_, thunkAPI) {
+        const response = await api.historys.historysStatuses() as AxiosResponse<T_Statuses[]>;
+        return response.data;
     }
 )
 
@@ -134,6 +144,9 @@ const historysSlice = createSlice({
         });
         builder.addCase(fetchHistorys.fulfilled, (state:T_HistorysSlice, action: PayloadAction<T_History[]>) => {
             state.historys = action.payload
+        });
+        builder.addCase(fetchHistoryStatuses.fulfilled, (state:T_HistorysSlice, action: PayloadAction<T_History[]>) => {
+            state.statuses = action.payload
         });
         builder.addCase(removeFilmFromDraftHistory.rejected, (state:T_HistorysSlice) => {
             state.history = null

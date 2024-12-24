@@ -2,7 +2,8 @@ import {useEffect, useState} from "react";
 import {useAppDispatch, useAppSelector} from "store/store.ts";
 import {
     fetchHistorys,
-    updateFilters
+    updateFilters,
+    fetchHistoryStatuses
 } from "store/slices/historysSlice.ts";
 import {Button, Col, Container, Form, Input, Row} from "reactstrap";
 import {useNavigate} from "react-router-dom";
@@ -18,6 +19,8 @@ const HistorysPage = () => {
 
     const filters = useAppSelector<T_HistorysFilters>((state) => state.historys.filters)
 
+    const statusesFromStore = useAppSelector((state) => state.historys.statuses);
+
     const navigate = useNavigate()
 
     const dispatch = useAppDispatch()
@@ -30,12 +33,9 @@ const HistorysPage = () => {
 
     const [owner, setOwner] = useState(filters.owner)
 
-    const statusOptions = {
-        "Не указан": "Не указан",
-        "В работе": "В работе",
-        "Завершен": "Завершен",
-        "Отклонен": "Отклонен"
-    }
+    const statusOptions = statusesFromStore
+    .filter(status => status !== "Введен" && status !== "Удален")
+    .concat("Не указан");
 
     useEffect(() => {
         if (!is_authenticated) {

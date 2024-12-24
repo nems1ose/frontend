@@ -550,6 +550,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         ...params,
       }),
 
+      
+    /**
+     * No description
+     *
+     * @tags historys
+     * @name HistorysStatuses
+     * @request GET:/historys/{history_id}/
+     * @secure
+     */
+    historysStatuses: (params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/historys/statuses/`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+
     /**
      * No description
      *

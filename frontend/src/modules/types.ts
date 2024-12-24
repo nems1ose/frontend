@@ -23,12 +23,9 @@ export type T_History = {
     date: string
 }
 
-export enum E_HistoryStatus {
-    Draft="Введен",
-    InWork="В работе",
-    Completed="Завершен",
-    Rejected="Отклонен",
-    Deleted="Удален"
+export type T_Statuses = {
+    id: string
+    name: string
 }
 
 export type T_User = {
@@ -67,4 +64,12 @@ export type T_FilmAddData = {
     description: string;
     time: number;
     image?: File | null;
+}
+
+export enum E_HistoryStatus {
+    Draft="Введен",
+    InWork="В работе",
+    Completed="Завершен",
+    Rejected="Отклонен",
+    Deleted="Удален"
 }
