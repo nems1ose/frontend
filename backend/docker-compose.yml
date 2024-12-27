@@ -6,7 +6,7 @@ services:
     volumes:
       - ./:/usr/src/app
     ports:
-      - "172.20.10.6:8000:8000"
+      - "192.168.51.197:8000:8000"
     environment:
       PYTHONUNBUFFERED: 1
     depends_on:
