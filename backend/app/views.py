@@ -219,7 +219,7 @@ def search_historys(request):
         historys = historys.filter(date_formation__gte=parse_datetime(date_formation_start))
 
     if date_formation_end and parse_datetime(date_formation_end):
-        historys = historys.filter(date_formation__lt=parse_datetime(date_formation_end))
+        historys = historys.filter(date_formation__lte=parse_datetime(date_formation_end))
 
     serializer = HistorysSerializer(historys, many=True)
 
