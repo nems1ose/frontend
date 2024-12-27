@@ -12,6 +12,8 @@ import {E_HistoryStatus, T_Film} from "modules/types.ts";
 import FilmCard from "components/FilmCard/FilmCard.tsx";
 import CustomInput from "components/CustomInput/CustomInput.tsx";
 import CustomDatePicker from "components/CustomDatePicker/CustomDatePicker.tsx";
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 
 const HistoryPage = () => {
     const { id } = useParams<{id: string}>();
@@ -84,7 +86,14 @@ const HistoryPage = () => {
         <Form onSubmit={sendHistory} className="pb-5">
             <h2 className="mb-5">{isDraft ? "Черновая история" : `История №${id}` }</h2>
             <Row className="mb-5 fs-5 w-25">
-                <CustomDatePicker label="Дата просмотра" value={date} setValue={setDate} disabled={!isDraft || is_superuser}/>
+                <DatePicker 
+                    selected={date} 
+                    onChange={date => setDate(date)} 
+                    disabled={!isDraft || is_superuser} 
+                    dateFormat="dd/MM/yyyy"
+                    placeholderText="Дата просмотра" 
+                    className="form-control"
+                />
                 {isCompleted && <CustomInput label="Оценка" placeholder="Введите оценку" value={estimation} disabled={true} type="number"/> }
             </Row>
             <Row>
