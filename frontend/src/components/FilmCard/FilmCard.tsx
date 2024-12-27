@@ -4,7 +4,7 @@ import {useAppDispatch, useAppSelector} from "store/store.ts";
 import {T_Film} from "modules/types.ts";
 import {
     removeFilmFromDraftHistory,
-    updateFilmValue
+    updateFilmValue, triggerUpdateMM
 } from "store/slices/historysSlice.ts";
 import {useEffect, useState} from "react";
 import CustomInput from "components/CustomInput/CustomInput.tsx";
@@ -51,6 +51,12 @@ const FilmCard = ({film, showAddBtn=false, showRemoveBtn=false, editMM=false}:Pr
         }))
     }
 
+    const saveMM = async (e?) => {
+        e?.preventDefault()
+
+        await dispatch(triggerUpdateMM())
+    }
+
     if (isHistoryPage) {
         return (
             <Card key={film.id}>
@@ -76,6 +82,9 @@ const FilmCard = ({film, showAddBtn=false, showRemoveBtn=false, editMM=false}:Pr
                         <CustomInput label="Просмотрено" type="number" value={local_viewed} setValue={setLocal_viewed} disabled={!editMM || is_superuser} className={"w-25"}/>
                     </Col>
                     <Col className="d-flex flex-row gap-3 align-items-center">
+                                <Button color="success" className="fs-4" onClick={saveMM}>
+                                    Сохранить
+                                </Button>
                             <Link to={`/films/${film.id}`}>
                                 <Button color="primary" type="button">
                                     Открыть
