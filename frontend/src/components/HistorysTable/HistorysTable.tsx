@@ -26,10 +26,7 @@ const HistorysTable = ({historys}:Props) => {
                             Оценка
                         </Col>
                         <Col>
-                            Дата создания
-                        </Col>
-                        <Col>
-                            Дата формирования
+                            Дата просмотра
                         </Col>
                         <Col>
                             Дата завершения

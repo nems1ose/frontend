@@ -45,10 +45,7 @@ const HistoryCard = ({history, index}:Props) => {
                     {history.estimation}
                 </Col>
                 <Col>
-                    {formatDate(history.date_created)}
-                </Col>
-                <Col>
-                    {formatDate(history.date_formation)}
+                    {formatDate(history.date)}
                 </Col>
                 <Col>
                     {formatDate(history.date_complete)}
