@@ -29,11 +29,22 @@ const FilmsTable = ({films}:Props) => {
     }
 
     const columns = useMemo(
-        () => [
+        () => [ 
             {
                 Header: '№',
                 accessor: 'id',
             },
+            { 
+                Header: 'Картинка', 
+                accessor: 'image', 
+                Cell: ({ value }) => (
+                    <img 
+                        alt="" 
+                        src={value} 
+                        style={{ width: '50px', height: 'auto' }} 
+                    />
+                ) 
+            },   
             {
                 Header: 'Название',
                 accessor: 'name',
